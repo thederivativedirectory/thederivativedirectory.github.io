@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Derivative Directory — Interactive Calculus Models</title>
+  <meta name="description" content="A free library of interactive Desmos models that turn AP Calculus concepts — limits, derivatives, slope fields, integrals, and solids — into things you can drag, animate, and explore. Built for teachers and students." />
+
+  <!-- Fonts: Fraunces (display), Manrope (body), JetBrains Mono (data/equations) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <!-- Decorative graph-paper canvas backdrop (purely visual, behind everything) -->
+  <canvas id="bg-grid" aria-hidden="true"></canvas>
+
+  <!-- Skip link for keyboard / screen reader users -->
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ================= NAVIGATION ================= -->
+  <header class="site-header" id="site-header">
+    <nav class="navbar" aria-label="Primary">
+      <a href="#home" class="brand">
+        <span class="brand-mark" aria-hidden="true">∂</span>
+        <span class="brand-text">
+          <span class="brand-title">The Derivative</span>
+          <span class="brand-sub">Directory</span>
+        </span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">Why</a></li>
+        <li><a href="#process" class="nav-link">How It Works</a></li>
+        <li><a href="#audiences" class="nav-link">Audiences</a></li>
+        <li><a href="#library" class="nav-link">Model Library</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="#about me" class="nav-link">About Me</a></li>
+        <li><a href="#limitations" class="nav-link">Limitations</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">
+          <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 1.8v2.6M12 19.6v2.6M21.2 12h-2.6M5.4 12H2.8M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8M18.4 18.4l-1.8-1.8M7.4 7.4 5.6 5.6"/></svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z"/></svg>
+        </button>
+
+        <a href="#contact" class="btn btn-primary btn-small nav-cta">
+          <span>Contact</span>
+        </a>
+
+        <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile slide-down menu -->
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#process" class="nav-link">How It Works</a>
+      <a href="#audiences" class="nav-link">Teachers &amp; Students</a>
+      <a href="#library" class="nav-link">Model Library</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="home">
+      <div class="hero-aurora" aria-hidden="true"></div>
+
+      <div class="hero-inner container">
+        <div class="hero-copy">
+          <p class="eyebrow" data-reveal>
+            <span class="eyebrow-dot" aria-hidden="true"></span>
+            Free interactive calculus models
+          </p>
+
+          <h1 class="hero-title" data-reveal>
+            Math, made <span class="text-accent">visible.</span>
+          </h1>
+
+          <p class="hero-lede" data-reveal>
+            The Derivative Directory is a growing library of interactive Desmos
+            models that turn abstract mathematical concepts like
+            slope fields and solids into simple yet
+            effective and easy-to-understand animations and visuals.
+          </p>
+
+          <div class="hero-actions" data-reveal>
+            <a href="#library" class="btn btn-primary btn-ripple">
+              <span>Browse the model library</span>
+              <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#about" class="btn btn-ghost btn-ripple">
+              <span>How it works</span>
+            </a>
+          </div>
+
+          <div class="hero-meta" data-reveal>
+            <span class="meta-pill"><strong>14</strong> models</span>
+            <span class="meta-pill">Completely <strong>Free</strong></span>
+            <span class="meta-pill">No Account Needed</span>
+          </div>
+        </div>
+
+        <!-- Signature element: live derivative visualization -->
+        <div class="hero-visual" data-reveal>
+          <div class="graph-card">
+            <div class="graph-card-header">
+              <span class="graph-dot" aria-hidden="true"></span>
+              <span class="graph-card-title">live derivative</span>
+              <span class="graph-readout" id="derivative-readout" aria-live="polite">f&prime;(x) ≈ 0.00</span>
+            </div>
+            <canvas id="derivative-canvas" width="560" height="420" role="img" aria-label="Animated graph showing a curve, a point moving along it, and the tangent line representing the derivative at that point"></canvas>
+            <div class="graph-card-footer">
+              <span>f(x) = sin(x) + 0.18x</span>
+              <span class="graph-card-footer-hint">tap to pause</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-indicator" aria-hidden="true">
+        <span></span>
+      </div>
+    </section>
+
+    <!-- ================= MODEL LIBRARY ================= -->
+    <section class="section section-alt" id="library">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="section-eyebrow">Model library</p>
+          <h2 class="section-title">Fourteen models</h2>
+          <p class="section-text">
+            Every model opens directly in Desmos. Instructions are provided
+            in the equations tab. Manipulate variables in the user tab or,
+            if provided, use the UI in the graph itself.
+          </p>
+          <p class = "section-text">
+            Unit labels are based on the chapters of the following textbook:
+            "Calculus: Early Transcendentals" by James Stewart. 
+            Citation found in the "About Me" section.
+          </p>
+        </div>
+
+        <!-- Filter pills -->
+        <div class="filter-bar" role="group" aria-label="Filter models by unit" data-reveal>
+          <button class="filter-pill is-active" data-filter="all" type="button">All models</button>
+          <button class="filter-pill" data-filter="limits" type="button">Limits &amp; Continuity</button>
+          <button class="filter-pill" data-filter="differentiation" type="button">Differentiation</button>
+          <button class="filter-pill" data-filter="diffeq" type="button">Differential Equations</button>
+          <button class="filter-pill" data-filter="integration" type="button">Integration &amp; Volume</button>
+          <button class="filter-pill" data-filter="series" type="button">Sequences &amp; Series</button>
+          <button class="filter-pill" data-filter="multi" type="button">Multivariable Calculus</button>
+        </div>
+
+        <div class="model-grid" id="model-grid">
+
+          <!-- Limits & Continuity -->
+          <article class="model-card" data-reveal data-category="limits">
+            <div class="model-card-top">
+              <span class="model-tag">2D</span>
+              <span class="model-unit">Unit 2: Limits &amp; Continuity</span>
+            </div>
+            <h3 class="model-title">Limit Calculator &amp; Table</h3>
+            <p class="model-desc">
+              Graphs any function you enter, then builds a two-sided limit table
+              around a chosen x-value. Shows whether the limit exists and, if it does, what it equals.
+            </p>
+            <p class="model-use"><strong>Use it for:</strong> tedious limit problems, and for showing that a limit doesn't always equal the function's value at that point.</p>
+            <p class="model-use"><strong>Related Problems:</strong> Section 2.2, Questions 15-18 </p>
+            <a class="model-link" href="https://www.desmos.com/calculator/664298a94d" target="_blank" rel="noopener noreferrer">
+              Open in Desmos
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3h7v7M13 3 3 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+
+          <article class="model-card" data-reveal data-category="limits">
+            <div class="model-card-top">
+              <span class="model-tag">2D</span>
+              <span class="model-unit">Unit 2: Limits &amp; Continuity</span>
+            </div>
+            <h3 class="model-title">Continuity Proof Practice</h3>
+            <p class="model-desc">
+              A simple, AP-style continuity practice problem. Contains the three
+              different types of discontinuity.
+            </p>
+            <p class="model-use"><strong>Use it for:</strong> reviewing AP-style continuity proofs. Close the equations tab before presenting.</p>
+            <a class="model-link" href="https://www.desmos.com/calculator/1889a93691" target="_blank" rel="noopener noreferrer">
+              Open in Desmos
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3h7v7M13 3 3 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+
+          <!-- Differentiation -->
+          <article class="model-card" data-reveal data-category="differentiation">
+            <div class="model-card-top">
+              <span class="model-tag">2D</span>
+              <span class="model-unit">Unit 3: Differentiation</span>
+            </div>
+            <h3 class="model-title">Difference Quotients</h3>
+            <p class="model-desc">
+              Draws a secant line through two points on a curve, then animates
+              the second point sliding in until the secant collapses into the
+              tangent line. Visually animates \(\lim_{h\to0}\frac{f(x+h)-f(x)}{h} \)
+              Describes theory behind differentiation.
+            </p>
+            <p class="model-use"><strong>Use it for:</strong> visually proving that the derivative is the limit of the difference quotient.</p>
+            <p class="model-use"><strong>Related Problems:</strong> Section 2.1, Question 1, 2 </p>
+            <a class="model-link" href="https://www.desmos.com/calculator/6de7fdd216" target="_blank" rel="noopener noreferrer">
+              Open in Desmos
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3h7v7M13 3 3 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+
+          <article class="model-card" data-reveal data-category="differentiation">
+            <div class="model-card-top">
+              <span class="model-tag">2D</span>
+              <span class="model-unit">Unit 3: Differentiation</span>
+            </div>
+            <h3 class="model-title">Differentiability Proof Practice</h3>
+            <p class="model-desc">
+              Another simple, AP-style practice problem, this time with
+              the three different ways a function can fail to be
+              differentiable.
+            </p>
+            <p class="model-use"><strong>Use it for:</strong> the differentiability unit, reviewing AP-style justification of non-differentiable points.</p>
+            <a class="model-link" href="https://www.desmos.com/calculator/ugro4blkmz" target="_blank" rel="noopener noreferrer">
+              Open in Desmos
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3h7v7M13 3 3 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+
+          <article class="model-card" data-reveal data-category="differentiation">
+            <div class="model-card-top">
+              <span class="model-tag">2D</span>
+              <span class="model-unit">Unit 3: Differentiation</span>
+            </div>
+            <h3 class="model-title">Tangent Line Calculator</h3>
+            <p class="model-desc">
+              Draws the tangent line at any point on your function and
+              writes out the line in both slope-intercept and
+              point-slope form.
+            </p>
+            <p class="model-use"><strong>Use it for:</strong> any problem that asks for "the derivative at a point" or "the equation of the tangent line."</p>
+            <p class="model-use"><strong>Related Problems:</strong> Section 3.1, Questions 39-42 </p>
+            <a class="model-link" href="https://www.desmos.com/calculator/cd58d1ae97" target="_blank" rel="noopener noreferrer">
+              Open in Desmos
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3h7v7M13 3 3 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+
+          <!-- Differential Equations & Numerical Methods -->
+          <article class="model-card" data-reveal data-category="diffeq">
+            <div class="model-card-top">
+              <span class="model-tag">2D</span>
+              <span class="model-unit">Unit 9: Differential Equations</span>
+            </div>
+            <h3 class="model-title">Slope Field Generator</h3>
+            <p class="model-desc">
+              Enter any differential equation with bounds and step size, and
+              get a full slope field, color-coded by steepness.
+            </p>
+            <p class="model-use"><strong>Use it for:</strong> skipping the tedious hand-drawing of slope fields while still seeing exactly how they're built.</p>
+            <p class="model-use"><strong>Related Problems:</strong> Section 9.2, Questions 3-6 </p>
+            <a class="model-link" href="https://www.desmos.com/calculator/226ix4bjao" target="_blank" rel="noopener noreferrer">
+              Open in Desmos
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3h7v7M13 3 3 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+
+          <article class="model-card" data-reveal data-category="diffeq">
+            <div class="model-card-top">
+              <span class="model-tag">2D</span>
+              <span class="model-unit">Unit 9: Differential Equations</span>
+            </div>
+            <h3 class="model-title">Euler's Method</h3>
+            <p class="model-desc">
+              Enter a differential equation and a step size (&Delta;x), then iterate
+              Euler's method. Each linear approximation is drawn and slope is already
+              calculated.
+            </p>
+            <p class="model-use"><strong>Use it for:</strong> generating Euler's method values and seeing linearization happen rather than just computing it.</p>
+            <p class="model-use"><strong>Related Problems:</strong> Section 9.2, Questions 21-24 </p>
+            <a class="model-link" href="https://www.desmos.com/calculator/4tgicql6va" target="_blank" rel="noopener noreferrer">
+              Open in Desmos
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3h7v7M13 3 3 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+
+          <article class="model-card" data-reveal data-category="differentiation">
+            <div class="model-card-top">
+              <span class="model-tag">2D</span>
+              <span class="model-unit">Unit 4: Applications of Differentiation</span>
+            </div>
+            <h3 class="model-title">Newton's Method</h3>
+            <p class="model-desc">
+              Enter a function and drag a starting point, then
+              iterate Newton's method to have tangent lines approach
+              a zero. Note that normal restrictions (horizontal tangents, etc.)
+              for Newton's method will apply.
+            </p>
+            <p class="model-use"><strong>Use it for:</strong> visualizing repeated linearization toward a zero. <p>
+            <p class="model-use"><strong>Related Problems:</strong> Section 4.9, Questions 5-16 </p>
+            <a class="model-link" href="https://www.desmos.com/calculator/tyrujbovxp" target="_blank" rel="noopener noreferrer">
+              Open in Desmos
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3h7v7M13 3 3 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+
+          <!-- Related Rates -->
+          <article class="model-card model-card-feature" data-reveal data-category="differentiation">
+            <div class="model-card-top">
+              <span class="model-tag model-tag-3d">3D</span>
+              <span class="model-unit">Unit 3: Differentiation</span>
+            </div>
+            <h3 class="model-title">The Cone Problem</h3>
+            <p class="model-desc">
+              A fully animated 3D cone that drains at a constant rate of height
+              or volume. Height, volume, and the non-constant rate of change
+              are displayed.
+            </p>
+            <p class="model-use"><strong>Use it for:</strong> the classic related-rates cone problem. Watching the rate of change fluctuate alongside seeing the cone offers a common-sense explanation for the complex math.</p>
+            <p class="model-use"><strong>Related Problems:</strong> Section 3.10, Question 19 </p>
+            <a class="model-link" href="https://www.desmos.com/3d/0c6d2633df" target="_blank" rel="noopener noreferrer">
+              Open in Desmos 3D
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3h7v7M13 3 3 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+
+          <!-- Integration -->
+          <article class="model-card" data-reveal data-category="integration">
+            <div class="model-card-top">
+              <span class="model-tag">2D</span>
+              <span class="model-unit">Unit 5: Integration</span>
+            </div>
+            <h3 class="model-title">Riemann Sums</h3>
+            <p class="model-desc">
+              Enter a function and bounds, then switch between left, right,
+              middle, and trapezoidal approximations. The exact integral,
+              each sum's value, and percent error are shown.
+            </p>
+            <p class="model-use"><strong>Use it for:</strong> seeing how a Riemann sum converges to a definite integral, and for checking sums that are painfully slow by hand.</p>
+            <p class="model-use"><strong>Related Problems:</strong> Section 5.1, Questions 3-6 </p>
+            <a class="model-link" href="https://www.desmos.com/calculator/4085dfa2f8" target="_blank" rel="noopener noreferrer">
+              Open in Desmos
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3h7v7M13 3 3 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+
+          <!-- Series -->
+          <article class="model-card" data-reveal data-category="series">
+            <div class="model-card-top">
+              <span class="model-tag">2D</span>
+              <span class="model-unit">Unit 11: Sequences and Series</span>
+            </div>
+            <h3 class="model-title">Taylor Series</h3>
+            <p class="model-desc">
+              Enter a function, bounds, center, and the number of terms. The Taylor Series
+              approximation of the function will appear. The portion of the series that is
+              within a certain error margin (that you can change) will be highlighted.
+            </p>
+            <p class="model-use"><strong>Use it for:</strong> seeing how a Taylor Series
+            approximation actually looks and how it becomes progressively more accurate.</p>
+            <p class="model-use"><strong>Related Problems:</strong> Section 11.10, Questions 3-18 </p>
+            <a class="model-link" href="https://www.desmos.com/calculator/hno5crftms" target="_blank" rel="noopener noreferrer">
+              Open in Desmos
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3h7v7M13 3 3 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+
+          <!-- Volume -->
+          <article class="model-card model-card-feature" data-reveal data-category="integration">
+            <div class="model-card-top">
+              <span class="model-tag model-tag-3d">3D</span>
+              <span class="model-unit">Unit 6: Volume &amp; Solids</span>
+            </div>
+            <h3 class="model-title">Solids of Revolution</h3>
+            <p class="model-desc">
+              Enter your function(s), bounds, and the axis of rotation. Generates both
+              the smooth, continuous solid and a blocky cross-sectional
+              approximation to visually show how as the number of intervals approaches
+              infinity, the shape becomes smooth. 
+            </p>
+            <p class="model-use"><strong>Use it for:</strong> volume problems where a region 
+            is revolved around an axis. An "active use" folder lets you toggle which parts of the model are visible.</p>
+            <p class="model-use"><strong>Related Problems:</strong> Section 6.2, Questions 1-30 </p>
+            <a class="model-link" href="https://www.desmos.com/3d/fqvgmaehxc" target="_blank" rel="noopener noreferrer">
+              Open in Desmos 3D
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3h7v7M13 3 3 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+
+          <article class="model-card model-card-feature" data-reveal data-category="integration">
+            <div class="model-card-top">
+              <span class="model-tag model-tag-3d">3D</span>
+              <span class="model-unit">Unit 6: Volume &amp; Solids</span>
+            </div>
+            <h3 class="model-title">Cross-Section Solids</h3>
+            <p class="model-desc">
+              Enter the functions and bounds, then choose the cross-section to stack 
+              (squares, semicircles, equilateral triangles, and right triangles)
+              and see the resulting solid in 3D. Blocky cross-sections are also available.
+            </p>
+            <p class="model-use"><strong>Use it for:</strong> volume problems where a solid is
+            formed by stacking known cross-sections on a base region.
+            Same toggleable "active use" folder as the solids of revolution.
+            Most parts of the active use folder have corresponding buttons on the
+            graph itself. </p>
+            <p class="model-use"><strong>Related Problems:</strong> Section 6.2, Questions 54-60 </p>
+            <a class="model-link" href="https://www.desmos.com/3d/zdcvbxu0m5" target="_blank" rel="noopener noreferrer">
+              Open in Desmos 3D
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3h7v7M13 3 3 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+
+          <!-- Multi -->
+          <article class="model-card" data-reveal data-category="multi">
+            <div class="model-card-top">
+              <span class="model-tag model-tag-3d">2D</span>
+              <span class="model-unit">Multivariable Calculus</span>
+            </div>
+            <h3 class="model-title">Fourier Transform</h3>
+            <p class="model-desc">
+              Enter the function and bounds and the number of terms. Or, just
+              the function and drag the points on-screen for bounds and the number of terms.
+            </p>
+            <p class="model-use"><strong>Use it for:</strong> Finding the Fourier
+            transform of various functions <br>
+            <strong> Disclaimer:</strong> Due to the way Desmos computes definite
+            integrals, the graph may break down at a high number of terms. This will be
+            relatively obvious &mdash; the Fourier transform (orange curve) will
+            suddenly "explode" or gain amplitude. For more information on why this
+            happens, go to the "Limitations" section.</p>
+            <a class="model-link" href="https://www.desmos.com/3d/zdcvbxu0m5" target="_blank" rel="noopener noreferrer">
+              Open in Desmos 3D
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3h7v7M13 3 3 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+
+        </div>
+
+        <p class="library-note" data-reveal>
+          New models are added unit by unit. If a particular topic would help your
+          class, send a request from the <a href="#contact">contact section</a> below.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= ABOUT / MISSION ================= -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-grid-about">
+          <div data-reveal>
+            <p class="section-eyebrow">About the project</p>
+            <h2 class="section-title">
+              A visual demonstration of the ideas formulas represent
+            </h2>
+            <p class="section-text">
+              Math can be abstract: differential equations and solids of revolution
+              are not easy to visualize. At some point, intuition is lost to
+              notation and endless formulas. The Derivative Directory helps
+              bring back true understanding.
+            </p>
+            <p class="section-text">
+              Every model is built in Desmos and made as user-friendly as possible.
+              Models are organized by math course and unit. Enter your own
+              function or homework problem and watch the visual work.
+            </p>
+            <p class="section-text">
+              Following AP guidelines, all values are rounded to 3 decimals places.
+            </p>
+            <p class="section-text section-text-muted">
+              <strong>A note on performance:</strong> a few models, especially the 3D
+              solids, are computationally heavy and may take a moment to render.
+              Give them a few seconds to load before troubleshooting. Additionally,
+              avoid zooming in on any on-screen text inside the Desmos canvas.
+            </p>
+          </div>
+
+          <div class="stat-grid" data-reveal>
+            <div class="stat-card">
+              <span class="stat-number" data-counter data-target="14">0</span>
+              <span class="stat-label">Interactive models</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number" data-counter data-target="7">0</span>
+              <span class="stat-label">Sections of Calculus covered</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number"><span data-counter data-target="2">0</span>D&nbsp;/&nbsp;3D</span>
+              <span class="stat-label">Dimensions modeled</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number"><span data-counter data-target="100">0</span>%</span>
+              <span class="stat-label">Free, no login required</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROCESS / HOW IT WORKS ================= -->
+    <section class="section section-alt" id="process">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="section-eyebrow">How it works</p>
+          <h2 class="section-title">4 steps to find the model that's best for you</h2>
+          <p class="section-text">
+            Models are designed to assist your teaching, not replace it.
+            Here's how to find and use the model that matches your needs.
+          </p>
+        </div>
+
+        <ol class="process-list">
+          <li class="process-step" data-reveal>
+            <span class="process-index">01</span>
+            <h3 class="process-title">Pick your unit</h3>
+            <p class="process-text">
+              Head to the Model Library and filter by math course and unit.
+            </p>
+          </li>
+          <li class="process-step" data-reveal>
+            <span class="process-index">02</span>
+            <h3 class="process-title">Open the model</h3>
+            <p class="process-text">
+              Every card links straight to a live Desmos graph, in 2D or
+              3D. No account or install, just a browser tab.
+            </p>
+          </li>
+          <li class="process-step" data-reveal>
+            <span class="process-index">03</span>
+            <h3 class="process-title">Drop in your problem</h3>
+            <p class="process-text">
+              Type in all relevant information (function, points, bounds, etc.)
+              from your problem. Most models come with a small built-in
+              interface for this process.
+            </p>
+          </li>
+          <li class="process-step" data-reveal>
+            <span class="process-index">04</span>
+            <h3 class="process-title">Explore and explain</h3>
+            <p class="process-text">
+              Drag points and run live animations and watch
+              the model produce colorful visuals.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= AUDIENCES: TEACHERS & STUDENTS ================= -->
+    <section class="section" id="audiences">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="section-eyebrow">Who it's for</p>
+          <h2 class="section-title">Two audiences, one set of models</h2>
+        </div>
+
+        <div class="audience-grid">
+          <article class="audience-card" data-reveal>
+            <div class="audience-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none"><rect x="3" y="5" width="26" height="18" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M9 27h14M16 23v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 17l4-5 3 3 5-6 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="audience-title">For teachers</h3>
+            <p class="audience-text">
+              Built to project at the front of the room. Use a model alongside
+              traditional instruction to give visual learners something concrete
+              to follow. Enter problems from the textbook or notes and show the
+              model live.
+            </p>
+            <ul class="audience-list">
+              <li>Project a model during lectures</li>
+              <li>Swap in the exact problem</li>
+              <li>Use proof-practice models for AP-style justification</li>
+            </ul>
+          </article>
+
+          <article class="audience-card" data-reveal>
+            <div class="audience-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none"><path d="M16 5 5 10l11 5 11-5-11-5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 14v6c0 1.6 3.1 3 7 3s7-1.4 7-3v-6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="audience-title">For students</h3>
+            <p class="audience-text">
+              Stuck on a homework problem? Plug your problem
+              into the matching model and watch the concept play out
+              visually.
+            </p>
+            <ul class="audience-list">
+              <li>Check homework and textbook problems</li>
+              <li>Review concepts before a test</li>
+              <li>Understand what formulas really mean</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TESTIMONIALS ================= -->
+    <section class="section" id="testimonials">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="section-eyebrow">Feedback</p>
+          <h2 class="section-title">What teachers and students say</h2>
+        </div>
+
+        <div class="testimonial-grid">
+          <figure class="testimonial-card" data-reveal>
+            <blockquote>
+              "My students finally see why a Riemann sum becomes an integral,
+              instead of just memorizing the formula. The percent-error readout
+              alone has changed how I teach the unit."
+            </blockquote>
+            <figcaption>
+              <span class="testimonial-name">AP Calculus Teacher</span>
+              <span class="testimonial-role">High School Math Department</span>
+            </figcaption>
+          </figure>
+
+          <figure class="testimonial-card" data-reveal>
+            <blockquote>
+              "I used the slope field generator to check an entire differential
+              equations homework set in about ten minutes. Drawing them by hand
+              used to take me an hour."
+            </blockquote>
+            <figcaption>
+              <span class="testimonial-name">Calculus BC Student</span>
+              <span class="testimonial-role">Self-review before exams</span>
+            </figcaption>
+          </figure>
+
+          <figure class="testimonial-card" data-reveal>
+            <blockquote>
+              "The tangent line model is the first thing I pull up when
+              introducing derivatives. Seeing the secant line collapse into the
+              tangent makes the definition click immediately."
+            </blockquote>
+            <figcaption>
+              <span class="testimonial-name">Math Curriculum Coordinator</span>
+              <span class="testimonial-role">District AP Program</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section class="section section-alt" id="faq">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="section-eyebrow">Questions</p>
+          <h2 class="section-title">Frequently asked questions</h2>
+        </div>
+
+        <div class="faq-list" data-reveal>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Is everything here actually free?</span>
+              <svg class="faq-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M8 3v10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>Yes. Every model is free to open, use, and share. There's no
+              account, paywall, or sign-up anywhere on this site or in the linked
+              Desmos graphs.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Do I need a Desmos account to use a model?</span>
+              <svg class="faq-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M8 3v10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>No. Each model opens in Desmos's standard graphing or 3D
+              calculator, which is freely viewable and usable by anyone with the
+              link. An account is only useful if you want to save your own copy
+              of the graph afterward.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Will the models work on a phone or tablet?</span>
+              <svg class="faq-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M8 3v10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>Yes, the 2D models work well on mobile screens. The 3D models
+              (the cone problem, solids of revolution etc.)
+              are usable on a tablet or phone, but a larger screen
+              makes rotating and dragging the 3D view much easier.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>A model feels slow or laggy; what's going on?</span>
+              <svg class="faq-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M8 3v10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>A few models, especially the 3D solids of revolution and
+              cross-sectional solids, run fairly resource intensive calculations, so they
+              can take a few seconds to render or respond after you change a
+              value. This is normal; give it a moment before assuming something
+              is broken.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Can I use these models for my own class?</span>
+              <svg class="faq-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M8 3v10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>Absolutely. Project a model during instruction or link it in your
+              own course materials. You could even have students open it independently.
+              Share the site with friends and colleagues.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Can I request a new model or report an issue?</span>
+              <svg class="faq-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M8 3v10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>Yes, that's actually exactly what the contact form below is for. Specific
+              model requests, bug reports, and "this model would be great if it also
+              did&hellip;" suggestions are all welcome. I appreciate all feedback.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-panel" data-reveal>
+          <div class="contact-info">
+            <p class="section-eyebrow">Get in touch</p>
+            <h2 class="section-title">Questions, requests, and feedback</h2>
+            <p class="section-text">
+              No matter your background or message, I appreciate the input.
+            </p>
+
+            <div class="contact-email">
+              <span class="contact-email-label">Email</span>
+              <button class="contact-email-value" id="copy-email" type="button" aria-label="Copy email address to clipboard">
+                <span>x85247540 [at] gmail [dot] com</span>
+                <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="5" y="5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M3 10V3.8C3 3.36 3.36 3 3.8 3H10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              </button>
+              <span class="copy-confirm" id="copy-confirm" role="status">Copied!</span>
+            </div>
+
+            <p class="section-text section-text-muted">
+              This is an independent student project and is not affiliated with
+              or endorsed by Desmos.
+            </p>
+          </div>
+
+          <form class="contact-form" id="contact-form" novalidate>
+            <div class="form-row">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" autocomplete="name" required>
+            </div>
+            <div class="form-row">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" required>
+            </div>
+            <div class="form-row">
+              <label for="role">I am a&hellip;</label>
+              <select id="role" name="role">
+                <option value="teacher">Teacher</option>
+                <option value="student">Student</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-ripple btn-full">
+              <span>Send message</span>
+            </button>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="about me">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="section-eyebrow">About Me</p>
+          <h2 class="section-title">A High Schooler and Math Nerd</h2>
+        </div>
+
+        <p class="section-text">
+              My name is Arjun Wazir and I'm a sophomore at Troy High School (in Fullerton).
+              I love math (obviously) but I also enjoy teaching, so I created this library
+              of Desmos models to help my teachers and peers. I really hope you find this
+              site useful! Share it with others and let them know that I am always looking
+              for feedback.
+        </p>
+        <p class="section-text">
+              I've always thought that truly understanding math and what it means to use a
+              formula helps with tests and grades as well as general knowledge. Models and
+              visuals have helped me with that and I hope you have the same experience.
+        </p>
+        <p class="section-text">
+          <strong>Textbook citation (MLA):</strong> <br>
+          Stewart, James. <i> SINGLE VARIABLE CALCULUS : Early Transcendentals</i>.
+          Cengage Learning, 2020.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section" id="limitations">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="section-eyebrow">Limitations and Errors</p>
+          <h2 class="section-title">A High Schooler and Math Nerd</h2>
+        </div>
+
+        <p class="section-text">
+              <strong> Infinite Series: </strong> Desmos cannot actually compute
+              infinite series. For this reason, for models like the Taylor Series and
+              Fourier Transform have a finite number of terms.
+        </p>
+        <p class="section-text">
+              <strong> Computation Power: </strong> As stated many times, many equations
+              require significant computational power, especially for 3d models due to the formulas
+              behind them. These models might have some error for the same reason.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a href="#home" class="brand brand-footer">
+        <span class="brand-mark" aria-hidden="true">∂</span>
+        <span class="brand-text">
+          <span class="brand-title">The Derivative</span>
+          <span class="brand-sub">Directory</span>
+        </span>
+      </a>
+
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#about">About</a>
+        <a href="#process">How It Works</a>
+        <a href="#library">Model Library</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a href="#about me" class="nav-link">About Me</a>
+        <a href="#limitations" class="nav-link">Limitations</a>
+      </nav>
+
+      <p class="footer-meta">
+        &copy; <span id="footer-year"></span> The Derivative Directory. Models built with Desmos.
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
