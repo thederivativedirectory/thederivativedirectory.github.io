@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const subject = encodeURIComponent(`Message from ${name} (${role})`);
       const body = encodeURIComponent(`${message}\n\n— ${name}\n${email}`);
-      const mailto = `mailto:x85247540@gmail.com?subject=${subject}&body=${body}`;
+      const mailto = `mailto:thederivativedirectory@gmail.com?subject=${subject}&body=${body}`;
 
       window.location.href = mailto;
       formStatus.textContent = 'Opening your email client to send this message…';
